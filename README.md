@@ -26,7 +26,46 @@ Set this file to run `npm run start:dev`.
 ## config/prod.env
 Set this file to run `npm start`.
 
-## Heroku Setup
+## Prisma Deployment
+
+```bash
+# update deployment environments
+cd config
+
+# point to the correct enpoint for your schema
+# dev.env
+PRISMA_ENDPOINT=http://localhost:4466/example/dev
+# test.env
+PRISMA_ENDPOINT=http://localhost:4466/example/test
+# prod.env
+PRISMA_ENDPOINT=https://xxx.herokuapp.com/food/prod
+
+cd ../prisma
+
+# deploy server updates
+prisma deploy -e ../config/dev.env
+prisma deploy -e ../config/test.env
+prisma deploy -e ../config/prod.env
+
+# update src/generated/prisma.graphql
+cd ..
+npm run get-schema
+
+# Verify the environments
+## test
+npm t
+
+## dev
+npm run start:dev
+# navigate to http://localhost:<PORT>
+
+## production
+heroku create # returns the app name
+heroku config:set -a app_name PRISMA_ENDPOINT=https://roller-blogging-app-37fed7a9d7.herokuapp.com/food/prod PORT=4000 JWT_SECRET=secret PRISMA_SERVICE_SECRET=secret
+npm start
+```
+
+## Heroku Setup (Production)
 The following variables are used by docker-compose and can be put in a dotenv file named `.env` in the prisma directory. The env_file and environment values in docker-compose.yml are for setting variables in the container.
 
 |Variable|Description|Example|
@@ -42,12 +81,15 @@ The following variables are used by docker-compose and can be put in a dotenv fi
 heroku login
 heroku create
 
+# heroku create returns the app
+# if it hasn't been automatically added as a git remote, then run the following
+git remote add heroku https://git.heroku.com/xxx.git
+
 # all of the environment variables in config/prod.env must be set
-heroku config:set JWT_SECRET=super-secret
-heroku config:set NODE_ENV=production
+heroku config:set JWT_SECRET=secret
 heroku config:set PORT=4000
 heroku config:set PRISMA_ENDPOINT=https://...
-heroku config:set PRISMA_SERVICE_SECRET=super-secret
+heroku config:set PRISMA_SERVICE_SECRET=secret
 
 # production
 git push heroku master
