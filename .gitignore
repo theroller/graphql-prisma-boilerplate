@@ -1,0 +1,18 @@
+~*
+*.log
+*.env*
+!.env-example
+!example.env
+*.orig
+*.tgz
+
+**/temp/
+.nyc_output/
+build/
+coverage/
+logs/
+node_modules/
+
+# Non-VSCode Editor settings
+.sublime/
+.idea/

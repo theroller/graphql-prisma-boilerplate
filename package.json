@@ -1,0 +1,65 @@
+{
+  "name": "graphql-prisma-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "debug": "cross-env DOTENV_CONFIG_PATH=config/dev.env node --nolazy --inspect-brk=9229 src/index.js",
+    "get-schema": "graphql get-schema -p prisma --dotenv config/dev.env",
+    "lint": "eslint src tests",
+    "start": "node src/index.js",
+    "start:dev": "cross-env DOTENV_CONFIG_PATH=config/dev.env nodemon src/index.js",
+    "test": "cross-env DOTENV_CONFIG_PATH=config/test.env jest --runInBand"
+  },
+  "keywords": [],
+  "author": "James Roller, Jr. <og.readmore@gmail.com>",
+  "dependencies": {
+    "bcrypt": "^3.0.7",
+    "cross-env": "^6.0.3",
+    "dotenv": "^8.2.0",
+    "graphql": "^14.5.8",
+    "graphql-cli": "^3.0.14",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "prisma": "^1.34.10",
+    "prisma-binding": "^2.3.16"
+  },
+  "devDependencies": {
+    "apollo-boost": "^0.4.7",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link": "^1.2.13",
+    "apollo-link-error": "^1.1.12",
+    "apollo-link-http": "^1.5.16",
+    "apollo-link-ws": "^1.0.19",
+    "apollo-utilities": "^1.3.3",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.7.2",
+    "graphql-tag": "^2.10.1",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
+    "subscriptions-transport-ws": "^0.9.16"
+  },
+  "jest": {
+    "globalSetup": "./tests/jest/globalSetup.js",
+    "globalTeardown": "./tests/jest/globalTeardown.js",
+    "setupFilesAfterEnv": [
+      "./tests/jest/setupFilesAfterEnv.js"
+    ],
+    "verbose": true
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*"
+    ],
+    "ext": "graphql,js,json",
+    "watch": [
+      "src"
+    ],
+    "verbose": false
+  }
+}
