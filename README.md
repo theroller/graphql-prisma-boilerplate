@@ -83,6 +83,7 @@ heroku create
 
 # heroku create returns the app
 # if it hasn't been automatically added as a git remote, then run the following
+heroku git:remote -a app_name
 git remote add heroku https://git.heroku.com/xxx.git
 
 # all of the environment variables in config/prod.env must be set
