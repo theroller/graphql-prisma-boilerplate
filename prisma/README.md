@@ -17,4 +17,10 @@ cp .env-dev .env
 
 # launch the prisma server
 docker-compose up -d
+
+# stop the prisma server
+docker-compose kill
+
+# remove the prisma server
+docker-compose down
 ```
