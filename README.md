@@ -106,4 +106,8 @@ cd prisma
 
 # example using development environment
 prisma token -e ../config/dev.env
+
+# IMPORTANT
+# token generation fails when a local .env file is present
+# the token will probably work with the prisma server, but it will not work with the Node.js application (i.e. this service)
 ```
